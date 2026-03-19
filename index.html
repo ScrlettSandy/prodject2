@@ -1,327 +1,759 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Good Design Magazine | Scarlett Sandy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Good Design Magazine | Scarlett Sandy</title>
 
-<style>
-:root{
---deep-red:#3d090c;
---wine:#280506;
---soft-rose:#d3aaaa;
---cream:#f8f2ec;
---text-dark:#3c1616;
---white:#ffffff;
---charcoal:#171313;
---ash:#d9d4d0;
-}
+  <style>
+    :root{
+      --bg:#120203;
+      --cherry:#5d0d12;
+      --cherry-dark:#2a0508;
+      --wine:#3b080c;
+      --wine-soft:#6d1820;
+      --rose:#e8d7d1;
+      --soft:#f6ece7;
+      --card:rgba(255,255,255,0.06);
+      --card-strong:rgba(255,255,255,0.08);
+      --text:#fff8f5;
+      --muted:#d8c3bc;
+      --line:rgba(255,255,255,0.12);
+      --shadow:0 20px 60px rgba(0,0,0,0.35);
+      --radius:28px;
+    }
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
 
-body{
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(rgba(61,9,12,0.78),rgba(61,9,12,0.78)),url("roses.jpg") center/cover fixed;
-color:var(--text-dark);
-line-height:1.6;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-h1,h2,h3,.display-font{
-font-family:Georgia,"Times New Roman",serif;
-letter-spacing:1px;
-}
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(138,18,30,0.42), transparent 35%),
+        radial-gradient(circle at top right, rgba(118,15,24,0.22), transparent 30%),
+        linear-gradient(180deg, #4a0a10 0%, #220407 42%, #120203 100%);
+      color:var(--text);
+      overflow-x:hidden;
+    }
 
-a{
-color:inherit;
-text-decoration:none;
-}
+    img{
+      display:block;
+      max-width:100%;
+    }
 
-img{
-width:100%;
-display:block;
-}
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
 
-.page{
-width:min(1200px,94vw);
-margin:0 auto;
-padding:18px 0 28px;
-}
+    .display{
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing:0.04em;
+    }
 
-.panel{
-background:var(--cream);
-border:10px solid rgba(211,170,170,0.9);
-margin-bottom:18px;
-overflow:hidden;
-}
+    .page{
+      width:min(1180px, 92vw);
+      margin:0 auto;
+      padding:28px 0 70px;
+    }
 
-.top-link{
-display:inline-block;
-margin-bottom:14px;
-color:var(--white);
-font-size:0.95rem;
-letter-spacing:0.08em;
-text-transform:uppercase;
-}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      margin-bottom:28px;
+    }
 
-/* HERO */
+    .brand{
+      font-size:0.95rem;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      font-weight:700;
+      color:var(--text);
+    }
 
-.hero{
-min-height:72vh;
-position:relative;
-background:linear-gradient(rgba(20,0,0,0.5),rgba(20,0,0,0.54)),url("4.jpg") center 20%/cover;
-display:flex;
-align-items:flex-end;
-padding:34px;
-color:var(--white);
-}
+    .nav{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
 
-.hero::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to top,rgba(20,0,0,0.56),rgba(20,0,0,0.12));
-z-index:1;
-}
+    .nav a{
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      padding-bottom:4px;
+      border-bottom:1px solid rgba(255,255,255,0.2);
+      transition:0.25s ease;
+      color:var(--text);
+    }
 
-.hero-content{
-position:relative;
-z-index:2;
-max-width:760px;
-}
+    .nav a:hover{
+      border-color:rgba(255,255,255,0.55);
+      transform:translateY(-1px);
+    }
 
-.eyebrow{
-display:inline-block;
-background:rgba(61,9,12,0.88);
-color:var(--white);
-padding:8px 14px;
-margin-bottom:16px;
-font-size:0.86rem;
-text-transform:uppercase;
-letter-spacing:0.12em;
-}
+    .hero{
+      min-height:84vh;
+      display:grid;
+      grid-template-columns:1.02fr 0.98fr;
+      gap:30px;
+      align-items:center;
+      margin-bottom:34px;
+      position:relative;
+    }
 
-.hero h1{
-font-size:clamp(3rem,7vw,6rem);
-line-height:0.9;
-text-transform:uppercase;
-margin-bottom:14px;
-color:rgba(255,244,240,0.95);
-text-shadow:0 2px 18px rgba(0,0,0,0.24);
-}
+    .hero-copy{
+      position:relative;
+      z-index:2;
+    }
 
-.hero p{
-max-width:640px;
-font-size:1.05rem;
-}
+    .eyebrow{
+      font-size:0.84rem;
+      letter-spacing:0.24em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:14px;
+      font-weight:700;
+    }
 
-.overview{
-display:grid;
-grid-template-columns:1.1fr 0.9fr;
-gap:18px;
-}
+    .hero h1{
+      font-size:clamp(3rem, 7vw, 6rem);
+      line-height:0.93;
+      margin-bottom:18px;
+      color:var(--text);
+      text-transform:uppercase;
+    }
 
-.section{
-padding:28px;
-}
+    .hero p{
+      max-width:620px;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:1rem;
+      margin-bottom:24px;
+    }
 
-.section-title{
-color:var(--deep-red);
-font-size:clamp(1.8rem,3vw,3.1rem);
-text-transform:uppercase;
-line-height:0.95;
-margin-bottom:16px;
-}
+    .hero-buttons{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
 
-.summary p{
-margin-bottom:12px;
-font-size:0.98rem;
-}
+    .button{
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:999px;
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      transition:0.25s ease;
+      box-shadow:var(--shadow);
+    }
 
-.meta-grid{
-display:grid;
-grid-template-columns:1fr;
-gap:12px;
-}
+    .button.primary{
+      background:linear-gradient(90deg, var(--wine-soft), var(--cherry));
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.08);
+    }
 
-.meta-card{
-background:var(--white);
-border:2px solid #ecd8d6;
-padding:14px;
-}
+    .button.secondary{
+      background:rgba(255,255,255,0.06);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.12);
+    }
 
-.meta-card h3{
-color:var(--deep-red);
-font-size:0.95rem;
-text-transform:uppercase;
-letter-spacing:0.08em;
-margin-bottom:6px;
-}
+    .button:hover{
+      transform:translateY(-2px);
+    }
 
-.meta-card p{
-font-size:0.97rem;
-}
+    .hero-visual{
+      position:relative;
+      min-height:620px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-.image-feature{
-background:var(--charcoal);
-padding:0;
-}
+    .hero-panel{
+      position:absolute;
+      inset:16px 0 16px 34px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:42px;
+      z-index:1;
+      box-shadow:var(--shadow);
+    }
 
-.image-feature img{
-max-height:760px;
-object-fit:cover;
-object-position:center top;
-}
+    .mag-stack{
+      position:relative;
+      z-index:2;
+      width:min(500px, 100%);
+      display:grid;
+      place-items:center;
+    }
 
-.caption{
-padding:14px 20px 18px;
-font-size:0.92rem;
-color:var(--wine);
-background:var(--cream);
-border-top:1px solid #e3d0cf;
-}
+    .mag-main{
+      width:70%;
+      border-radius:22px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.28);
+      object-fit:cover;
+    }
 
-.process-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
-}
+    .mag-small{
+      position:absolute;
+      width:42%;
+      border-radius:18px;
+      box-shadow:0 16px 34px rgba(0,0,0,0.24);
+      object-fit:cover;
+      filter:brightness(0.9);
+    }
 
-.process-card{
-background:var(--white);
-border:2px solid #ecd8d6;
-padding:20px;
-}
+    .mag-small.left{
+      left:0;
+      bottom:52px;
+      transform:rotate(-8deg);
+    }
 
-.process-number{
-font-family:Georgia,"Times New Roman",serif;
-font-size:2rem;
-color:var(--deep-red);
-margin-bottom:8px;
-}
+    .mag-small.right{
+      right:0;
+      top:48px;
+      transform:rotate(8deg);
+    }
 
-.process-card h3{
-color:var(--deep-red);
-text-transform:uppercase;
-font-size:1rem;
-margin-bottom:8px;
-}
+    .section{
+      margin-top:30px;
+      margin-bottom:34px;
+    }
 
-.gallery{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:18px;
-}
+    .section-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:var(--radius);
+      padding:34px;
+      box-shadow:var(--shadow);
+    }
 
-.gallery-card{
-background:var(--charcoal);
-border:2px solid #321010;
-overflow:hidden;
-}
+    .section-title{
+      font-size:clamp(2rem, 5vw, 3.5rem);
+      margin-bottom:18px;
+      line-height:0.95;
+      text-transform:uppercase;
+      color:var(--text);
+    }
 
-.gallery-card img{
-height:100%;
-min-height:360px;
-object-fit:cover;
-object-position:center top;
-}
+    .section-text{
+      color:var(--muted);
+      line-height:1.9;
+      font-size:1rem;
+      max-width:920px;
+    }
 
-.results{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:14px;
-margin-top:16px;
-}
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
 
-.result-pill{
-background:var(--deep-red);
-color:var(--white);
-padding:16px 14px;
-text-align:center;
-text-transform:uppercase;
-letter-spacing:0.08em;
-font-size:0.92rem;
-}
+    .mini-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
 
-.nav-row{
-display:flex;
-justify-content:space-between;
-gap:14px;
-margin-top:18px;
-}
+    .mini-card h3{
+      font-size:1.18rem;
+      margin-bottom:10px;
+      color:var(--text);
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+    }
 
-.nav-button{
-background:var(--deep-red);
-color:var(--white);
-padding:12px 18px;
-text-transform:uppercase;
-letter-spacing:0.08em;
-font-size:0.9rem;
-}
+    .mini-card p,
+    .mini-card li{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:0.98rem;
+    }
 
-@media (max-width:900px){
+    .mini-card ul{
+      padding-left:18px;
+      margin-top:8px;
+    }
 
-.overview,
-.process-grid,
-.gallery,
-.results{
-grid-template-columns:1fr;
-}
+    .process-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+      margin-top:24px;
+    }
 
-.hero{
-min-height:58vh;
-background-position:center 20%;
-}
+    .process-step{
+      background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border-radius:24px;
+      padding:22px 20px;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:var(--shadow);
+    }
 
-.hero h1{
-font-size:clamp(2.4rem,10vw,4rem);
-}
+    .step-number{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--wine-soft), var(--cherry));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      margin-bottom:14px;
+      box-shadow:var(--shadow);
+    }
 
-.nav-row{
-flex-direction:column;
-}
+    .process-step h4{
+      font-size:1.02rem;
+      margin-bottom:10px;
+      color:var(--text);
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+    }
 
-}
-</style>
+    .process-step p{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:0.95rem;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:20px;
+      margin-top:22px;
+    }
+
+    .feature-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border-radius:24px;
+      padding:24px;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:var(--shadow);
+    }
+
+    .feature-card h4{
+      font-size:1.05rem;
+      margin-bottom:8px;
+      color:var(--rose);
+      text-transform:uppercase;
+      letter-spacing:0.03em;
+    }
+
+    .feature-card p{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:0.95rem;
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:22px;
+      margin-top:24px;
+    }
+
+    .gallery-item{
+      background:rgba(255,255,255,0.06);
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:var(--shadow);
+    }
+
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      min-height:420px;
+    }
+
+    .gallery-caption{
+      padding:16px 18px 20px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:0.95rem;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    }
+
+    .reflection{
+      background:linear-gradient(135deg, rgba(109,24,32,0.26), rgba(255,255,255,0.04));
+    }
+
+    .footer-note{
+      text-align:center;
+      margin-top:26px;
+      color:rgba(255,255,255,0.6);
+      font-size:0.9rem;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+    }
+
+    .nav-row{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .nav-button{
+      display:inline-block;
+      padding:12px 18px;
+      background:linear-gradient(90deg, var(--wine-soft), var(--cherry));
+      color:#fff;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      font-size:0.88rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+      transition:0.25s ease;
+    }
+
+    .nav-button:hover{
+      transform:translateY(-2px);
+    }
+
+    @media (max-width: 1000px){
+      .hero,
+      .two-col,
+      .gallery-grid,
+      .feature-grid,
+      .process-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        min-height:auto;
+      }
+
+      .hero-visual{
+        min-height:520px;
+      }
+
+      .mag-main{
+        width:60%;
+      }
+
+      .mag-small{
+        width:36%;
+      }
+    }
+
+    @media (max-width: 640px){
+      .page{
+        width:min(94vw, 1000px);
+        padding-top:22px;
+      }
+
+      .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .section-card,
+      .mini-card{
+        padding:24px;
+      }
+
+      .hero-visual{
+        min-height:420px;
+      }
+
+      .hero-panel{
+        inset:10px 0 10px 0;
+      }
+
+      .mag-main{
+        width:72%;
+      }
+
+      .mag-small{
+        width:44%;
+      }
+
+      .gallery-item img{
+        min-height:320px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <main class="page">
 
-<main class="page">
+    <header class="topbar">
+      <div class="brand">Scarlett Sandy</div>
+      <nav class="nav">
+        <a href="https://scrlettsandy.github.io/portflio/">Home</a>
+        <a href="#overview">Overview</a>
+        <a href="#process">Process</a>
+        <a href="#gallery">Pages</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+    </header>
 
-<a class="top-link" href="https://scrlettsandy.github.io/portflio/" target="_blank">← Back to Home</a>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Editorial / Magazine Design</div>
+        <h1 class="display">Good Design Magazine</h1>
+        <p>
+          Good Design Magazine is a visual editorial project exploring what good design means to me
+          through typography, portrait imagery, composition, and magazine-inspired storytelling. I
+          used this project to create something expressive and bold while experimenting with layout,
+          hierarchy, and visual identity in a more conceptual way.
+        </p>
 
-<section class="panel hero">
-<div class="hero-content">
-<span class="eyebrow">Project Two</span>
-<h1 class="display-font">Good Design<br>Magazine</h1>
-<p>
-A magazine-style visual project exploring what good design means to me personally through portrait imagery, typography, and bold editorial layouts.
-</p>
-</div>
-</section>
+        <div class="hero-buttons">
+          <a href="#overview" class="button primary">Explore Project</a>
+          <a href="#gallery" class="button secondary">View Pages</a>
+        </div>
+      </div>
 
-<!-- content unchanged -->
+      <div class="hero-visual">
+        <div class="hero-panel"></div>
+        <div class="mag-stack">
+          <img src="4.jpg" alt="Good Design Magazine main cover" class="mag-main">
+          <img src="4.jpg" alt="Good Design detail view" class="mag-small left">
+          <img src="4.jpg" alt="Good Design editorial layout" class="mag-small right">
+        </div>
+      </div>
+    </section>
 
-<section class="panel section">
-<h2 class="section-title display-font">Reflection</h2>
+    <section class="section" id="overview">
+      <div class="section-card">
+        <div class="eyebrow">Project Overview</div>
+        <h2 class="section-title display">An editorial project exploring my view of good design.</h2>
+        <p class="section-text">
+          For this project, I created a magazine-style visual piece centered around my own definition
+          of good design. I focused on how typography, photography, texture, and layout can work
+          together to communicate attitude, message, and identity. Instead of approaching the project
+          like a traditional layout exercise, I treated it as something more expressive and visual,
+          where the editorial style itself became part of the meaning.
+        </p>
+      </div>
+    </section>
 
-<p>
-This project allowed me to explore my own definition of good design while working in an expressive and experimental editorial format. It pushed me to think about how visuals can communicate identity, attitude, and message all at once. This project reflects a side of my work that is more graphic, conceptual, and editorial, and it shows how I like to bring personality into design.
-</p>
+    <section class="section">
+      <div class="two-col">
+        <div class="mini-card">
+          <h3>What I Did</h3>
+          <p>
+            I developed the visual concept, organized the editorial layout, selected the image-based
+            direction, and designed the final page with a focus on hierarchy, contrast, and strong
+            composition. I used the magazine format to explore how design can feel both intentional
+            and emotionally expressive.
+          </p>
+        </div>
 
-<div class="nav-row">
-<a class="nav-button" href="https://scrlettsandy.github.io/project1/" target="_blank">Previous Project</a>
-<a class="nav-button" href="https://scrlettsandy.github.io/portflio/" target="_blank">Back to Home</a>
-<a class="nav-button" href="https://scrlettsandy.github.io/prodject3/" target="_blank">Next Project</a>
-</div>
+        <div class="mini-card">
+          <h3>Focus Areas</h3>
+          <ul>
+            <li>Editorial layout and visual hierarchy</li>
+            <li>Typography and composition</li>
+            <li>Image-led storytelling</li>
+            <li>Bold, fashion-inspired presentation</li>
+            <li>Using design to communicate personality and perspective</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-</section>
+    <section class="section" id="process">
+      <div class="section-card">
+        <div class="eyebrow">My Process</div>
+        <h2 class="section-title display">Building the project visually and conceptually.</h2>
+        <p class="section-text">
+          I approached this project as both a design exercise and a personal interpretation of what
+          makes something feel well designed. I focused on developing a page that felt bold and
+          polished while still being clear, balanced, and visually intentional.
+        </p>
 
-</main>
+        <div class="process-grid">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <h4>Concept</h4>
+            <p>
+              I started by defining my theme: what good design means to me personally, and how that
+              idea could be represented through an editorial format.
+            </p>
+          </div>
 
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <h4>Layout</h4>
+            <p>
+              I explored arrangement, spacing, and hierarchy to create a page that felt structured
+              but still expressive and visually bold.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <h4>Typography</h4>
+            <p>
+              I used typography as a major visual element, thinking carefully about scale, placement,
+              contrast, and how the text interacted with the image.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <h4>Refinement</h4>
+            <p>
+              I refined the overall composition so the final result felt clean, intentional, and
+              cohesive while still maintaining personality and impact.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <div class="eyebrow">Design Choices</div>
+        <h2 class="section-title display">What shapes the visual direction.</h2>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Editorial Composition</h4>
+            <p>
+              I wanted the page to feel like a real magazine spread, with a strong sense of structure
+              and a layout that leads the viewer’s eye naturally.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Typography</h4>
+            <p>
+              Type plays a major role in the piece, not just as information, but as a visual element
+              that adds mood, emphasis, and identity.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Portrait Imagery</h4>
+            <p>
+              The image selection helps give the project its fashion-inspired and expressive tone,
+              making the piece feel bold and visually memorable.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Minimal Palette</h4>
+            <p>
+              A limited palette helps keep the page cohesive and lets the layout, image, and type
+              carry the emotional weight of the design.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Balance + Contrast</h4>
+            <p>
+              I focused on balancing bold visual moments with enough negative space so the page would
+              still feel intentional and easy to read.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Personal Perspective</h4>
+            <p>
+              More than just a layout assignment, this project reflects my own taste and perspective
+              on what makes design feel strong, clear, and effective.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-card">
+        <div class="eyebrow">Page Gallery</div>
+        <h2 class="section-title display">Featured visuals.</h2>
+
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="4.jpg" alt="Good Design Magazine cover">
+            <div class="gallery-caption">
+              <strong>Main Page</strong><br>
+              The main visual centers the project’s editorial tone through bold portrait imagery,
+              dramatic contrast, and strong typography.
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <img src="4.jpg" alt="Good Design Magazine detail">
+            <div class="gallery-caption">
+              <strong>Typography + Image</strong><br>
+              This composition shows how the typography and image work together to create an
+              expressive, fashion-inspired magazine feel.
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <img src="4.jpg" alt="Good Design Magazine layout focus">
+            <div class="gallery-caption">
+              <strong>Layout Focus</strong><br>
+              The arrangement of elements was designed to feel balanced and intentional while still
+              keeping the page visually striking.
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <img src="4.jpg" alt="Good Design Magazine editorial detail">
+            <div class="gallery-caption">
+              <strong>Editorial Detail</strong><br>
+              The project uses minimal but impactful design decisions to create a page that feels both
+              polished and personal.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reflection">
+      <div class="section-card reflection">
+        <div class="eyebrow">Reflection</div>
+        <h2 class="section-title display">What I learned from this project.</h2>
+        <p class="section-text">
+          This project allowed me to explore my own definition of good design while working in a more
+          expressive editorial format. It pushed me to think about how visuals can communicate message,
+          tone, and identity all at once. I had to consider how typography, image choice, and layout
+          could work together to create a page that felt both intentional and visually compelling.
+        </p>
+        <br>
+        <p class="section-text">
+          It also helped me develop my confidence in more conceptual and graphic work. Rather than only
+          focusing on function, I thought carefully about mood, composition, and how design can reflect
+          personal perspective. Overall, this project shows a more experimental and editorial side of my
+          work, while still reflecting my interest in polished, visually memorable design.
+        </p>
+
+        <div class="nav-row">
+          <a class="nav-button" href="https://scrlettsandy.github.io/project1/" target="_blank">Previous Project</a>
+          <a class="nav-button" href="https://scrlettsandy.github.io/portflio/" target="_blank">Back to Home</a>
+          <a class="nav-button" href="https://scrlettsandy.github.io/prodject3/" target="_blank">Next Project</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">Good Design Magazine Project Page</div>
+  </main>
 </body>
 </html>
